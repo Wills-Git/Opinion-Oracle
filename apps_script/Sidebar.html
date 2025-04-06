@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <img src="https://randomuser.me/api/portraits/men/76.jpg"/>
+    <p><strong>Loyal Matt says:</strong></p>
+    <div id="selectedText">Loading...</div>
+    <p>
+      <label for="tag">Choose a tag:</label>
+      <select id="tag">
+        <option value="Important">Important</option>
+        <option value="Needs Review">Needs Review</option>
+        <option value="Custom">Custom</option>
+      </select>
+    </p>
+    <script>
+      google.script.run.withSuccessHandler(
+        function(apiResult) {
+        document.getElementById("selectedText").innerText = apiResult;
+      }).callOracles();
+    </script>
+  </body>
+</html>
