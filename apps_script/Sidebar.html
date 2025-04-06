@@ -1,21 +1,104 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <img src="https://randomuser.me/api/portraits/men/76.jpg"/>
-    <p><strong>Loyal Matt says:</strong></p>
-    <div id="selectedText">Loading...</div>
-    <p>
-      <label for="tag">Choose a tag:</label>
-      <select id="tag">
-        <option value="Important">Important</option>
-        <option value="Needs Review">Needs Review</option>
-        <option value="Custom">Custom</option>
-      </select>
-    </p>
+    <style>
+      img {
+        display: block;
+        border: #36bbcd solid 4px;
+        border-radius: 50% ;
+        height: 4rem;
+        max-inline-size: 100%;
+        object-fit: contain ; 
+      }
+
+      .review-text {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #080e0f;
+        margin: 1rem;
+      }
+
+      .wrapper {
+        background: #79e0ed;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem; 
+      }
+
+      .parent {
+        background: #f8fcfc
+      }
+
+    </style>
+    <div class="parent">
+    <div class="wrapper">
+    <img src="https://randomuser.me/api/portraits/women/22.jpg"/>
+    <p><strong>Loyal Amy says:</strong></p>
+    <div class="stars" id="loyalStars"></div>
+    <div class="review-text" id="loyalText">Loading...</div>
+    </div>
+
+    <div class="wrapper">
+    <img src="https://randomuser.me/api/portraits/men/29.jpg"/>
+    <p><strong>Impulsive Matt says:</strong></p>
+    <div class="stars" id="impulsiveStars"></div>
+    <div class="review-text" id="impulsiveText">Loading...</div>
+    </div>
+
+    <div class="wrapper">
+    <img src="https://randomuser.me/api/portraits/women/48.jpg"/>
+    <p><strong>Curious Jennifer says:</strong></p>
+    <div class="stars" id="curiousStars"></div>
+    <div class="review-text" id="curiousText">Loading...</div>
+    </div>
+
+    <div class="wrapper">
+    <img src="https://randomuser.me/api/portraits/women/58.jpg"/>
+    <p><strong>Thrifty Alexia says:</strong></p>
+    <div class="stars" id="thriftyStars"></div>
+    <div class="review-text" id="thriftyText">Loading...</div>
+    </div>
+
+    <div class="wrapper">
+    <img src="https://randomuser.me/api/portraits/men/45.jpg"/>
+    <p><strong>Unsatisfiable Mordecai says:</strong></p>
+        <div class="stars" id="unsatisfiableStars"></div>
+    <div class="review-text" id="unsatisfiableText">Loading...</div>
+    </div>
+
+    <div class="wrapper">
+    <img src="https://randomuser.me/api/portraits/women/89.jpg"/>
+    <p><strong>Easy Going Ava says:</strong></p>
+    <div class="stars" id="easyGoingStars"></div>
+    <div class="review-text" id="easyGoingText">Loading...</div>
+    </div>
+
+    </div>
+
+
+
     <script>
       google.script.run.withSuccessHandler(
         function(apiResult) {
-        document.getElementById("selectedText").innerText = apiResult;
+          if (typeof apiResult == "string"){
+            const allReviewNodes = document.querySelectorAll('[id]')
+            const allReviews = [...allReviewNodes]
+            allReviews.forEach(div => div.innerText = apiResult)
+          } else {
+          const {loyalResult, impulsiveResult, curiousResult, thriftyResult, unsatisfiableResult, easyGoingResult} = apiResult
+          document.getElementById("loyalText").innerText = loyalResult.slice(1)
+          document.getElementById("impulsiveText").innerText = impulsiveResult.slice(1)
+          document.getElementById("curiousText").innerText = curiousResult.slice(1)
+          document.getElementById("thriftyText").innerText = thriftyResult.slice(1)
+          document.getElementById("unsatisfiableText").innerText = unsatisfiableResult.slice(1)
+          document.getElementById("easyGoingText").innerText = easyGoingResult.slice(1)
+          //stars
+          document.getElementById("loyalStars").innerHTML = "&#x2B50 ".repeat(loyalResult[0])
+          document.getElementById("impulsiveStars").innerHTML = "&#x2B50 ".repeat(impulsiveResult[0])
+          document.getElementById("curiousStars").innerHTML = "&#x2B50 ".repeat(curiousResult[0])
+          document.getElementById("thriftyStars").innerHTML = "&#x2B50 ".repeat(thriftyResult[0])
+          document.getElementById("unsatisfiableStars").innerHTML = "&#x2B50 ".repeat(unsatisfiableResult[0])
+          document.getElementById("easyGoingStars").innerHTML = "&#x2B50 ".repeat(easyGoingResult[0])
+          }
       }).callOracles();
     </script>
   </body>

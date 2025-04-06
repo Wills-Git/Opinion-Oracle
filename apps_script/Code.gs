@@ -1,4 +1,3 @@
-// for archiving only
 function onOpen() {
   DocumentApp.getUi()
   .createMenu('Opinion Oracles')
@@ -26,7 +25,6 @@ function callOracles(){
   };
   Logger.log(text)
   Logger.log("logging")
-  // url removed
   const response = UrlFetchApp.fetch("", options)
   Logger.log(response)
   const data = JSON.parse(response.getContentText());
