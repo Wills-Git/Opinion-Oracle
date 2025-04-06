@@ -99,6 +99,7 @@
 
     </style>
     <div class="parent">
+    <div id="credits"><strong>Credits: 55</strong></div>
     <div class="wrapper">
     <img src="https://randomuser.me/api/portraits/women/22.jpg"/>
     <p><strong>Loyal Amy says:</strong></p>
@@ -146,6 +147,7 @@
 
 
     <script>
+
       google.script.run.withSuccessHandler(
         function(apiResult) {
           if (typeof apiResult == "string"){
@@ -153,6 +155,7 @@
             const allReviews = [...allReviewNodes]
             allReviews.forEach(div => div.innerText = apiResult)
           } else {
+
           const {loyalResult, impulsiveResult, curiousResult, thriftyResult, unsatisfiableResult, easyGoingResult} = apiResult
 
           document.getElementById("loyalText").innerText = loyalResult.slice(1)

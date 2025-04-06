@@ -6,12 +6,13 @@ function onOpen() {
   
 }
 
+
 function callOracles(){
 
   const text = getSelectedText()
 
   if(text.length < 150){
-
+    Logger.log("text: ",text)
     return "I don't have enough info to go on"
   }
 
@@ -26,7 +27,7 @@ function callOracles(){
   };
 
   const response = UrlFetchApp.fetch("", options)
-  Logger.log(response)
+
   const data = JSON.parse(response.getContentText());
   return data
 }
@@ -41,5 +42,5 @@ function getSelectedText() {
   const body = DocumentApp.getActiveDocument().getBody();
   if (!body) return 'No text present.';
 
-  return body
+  return body.getText()
 }
