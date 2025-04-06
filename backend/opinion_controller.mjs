@@ -2,6 +2,7 @@ import { config } from 'dotenv';
 import express from 'express';
 import asyncHandler from 'express-async-handler';
 import { GoogleGenAI } from '@google/genai';
+import { customers } from './prompts.mjs';
 
 config({path:'../.env'
 })
@@ -25,20 +26,41 @@ async function getOpinions(req,res){
     or use asterisks to portray attitude.
     If anything be terse. If there is not much to talk about, don't go on and on. Always return a number between 1 and 5 as the first character,
     indictating your review stars.
-    - description: ${userInput}`; 
+    - description: `; 
 
-    const response = await ai.models.generateContent({
+    const loyalResponse = await ai.models.generateContent({
         model:"gemini-2.0-flash",
-        contents: test
+        contents: customers.loyalCustomer + userInput
+    })
+    const impulsiveResponse = await ai.models.generateContent({
+        model:"gemini-2.0-flash",
+        contents: customers.impulsiveCustomer + userInput
+    })
+    const curiousResponse = await ai.models.generateContent({
+        model:"gemini-2.0-flash",
+        contents: customers.curiousCustomer + userInput
+    })
+    const thriftyResponse = await ai.models.generateContent({
+        model:"gemini-2.0-flash",
+        contents: customers.thriftyCustomer + userInput
+    })
+    const unsatisfiableResponse = await ai.models.generateContent({
+        model:"gemini-2.0-flash",
+        contents: customers.unsatisfiableCustomer + userInput
+    })
+    const easyGoingResponse = await ai.models.generateContent({
+        model:"gemini-2.0-flash",
+        contents: customers.easyGoingCustomer + userInput
     })
 
+
     const payload = {
-        "loyalResult": response.text,
-        "impulsiveResult": response.text,
-        "curiousResult": response.text,
-        "thriftyResult": response.text,
-        "unsatisfiableResult": response.text,
-        "easyGoingResult": response.text,
+        "loyalResult": loyalResponse.text,
+        "impulsiveResult": impulsiveResponse.text,
+        "curiousResult": curiousResponse.text,
+        "thriftyResult": thriftyResponse.text,
+        "unsatisfiableResult": unsatisfiableResponse.text,
+        "easyGoingResult": easyGoingResponse.text,
     }
     
     return res.status(200).json(payload)

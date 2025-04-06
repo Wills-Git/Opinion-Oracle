@@ -11,6 +11,11 @@
         object-fit: contain ; 
       }
 
+      strong {
+        font-family: Arial, Helvetica, sans-serif;
+        color: #080e0f;
+      }
+
       .review-text {
         font-family: Arial, Helvetica, sans-serif;
         color: #080e0f;
@@ -28,48 +33,112 @@
         background: #f8fcfc
       }
 
+      .lds-ellipsis,
+      .lds-ellipsis div {
+        box-sizing: border-box;
+      }
+      .lds-ellipsis {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+      }
+      .lds-ellipsis div {
+        position: absolute;
+        top: 33.33333px;
+        width: 13.33333px;
+        height: 13.33333px;
+        border-radius: 50%;
+        background: currentColor;
+        animation-timing-function: cubic-bezier(0, 1, 1, 0);
+      }
+      .lds-ellipsis div:nth-child(1) {
+        left: 8px;
+        animation: lds-ellipsis1 0.6s infinite;
+      }
+      .lds-ellipsis div:nth-child(2) {
+        left: 8px;
+        animation: lds-ellipsis2 0.6s infinite;
+      }
+      .lds-ellipsis div:nth-child(3) {
+        left: 32px;
+        animation: lds-ellipsis2 0.6s infinite;
+      }
+      .lds-ellipsis div:nth-child(4) {
+        left: 56px;
+        animation: lds-ellipsis3 0.6s infinite;
+      }
+      @keyframes lds-ellipsis1 {
+        0% {
+          transform: scale(0);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      @keyframes lds-ellipsis3 {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(0);
+        }
+      }
+      @keyframes lds-ellipsis2 {
+        0% {
+          transform: translate(0, 0);
+        }
+        100% {
+          transform: translate(24px, 0);
+        }
+      }
+
+
+
+      
+
     </style>
     <div class="parent">
     <div class="wrapper">
     <img src="https://randomuser.me/api/portraits/women/22.jpg"/>
     <p><strong>Loyal Amy says:</strong></p>
     <div class="stars" id="loyalStars"></div>
-    <div class="review-text" id="loyalText">Loading...</div>
+    <div class="review-text" id="loyalText"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>
     </div>
 
     <div class="wrapper">
     <img src="https://randomuser.me/api/portraits/men/29.jpg"/>
     <p><strong>Impulsive Matt says:</strong></p>
     <div class="stars" id="impulsiveStars"></div>
-    <div class="review-text" id="impulsiveText">Loading...</div>
+    <div class="review-text" id="impulsiveText"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>
     </div>
 
     <div class="wrapper">
     <img src="https://randomuser.me/api/portraits/women/48.jpg"/>
     <p><strong>Curious Jennifer says:</strong></p>
     <div class="stars" id="curiousStars"></div>
-    <div class="review-text" id="curiousText">Loading...</div>
+    <div class="review-text" id="curiousText"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>
     </div>
 
     <div class="wrapper">
     <img src="https://randomuser.me/api/portraits/women/58.jpg"/>
     <p><strong>Thrifty Alexia says:</strong></p>
     <div class="stars" id="thriftyStars"></div>
-    <div class="review-text" id="thriftyText">Loading...</div>
+    <div class="review-text" id="thriftyText"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>
     </div>
 
     <div class="wrapper">
     <img src="https://randomuser.me/api/portraits/men/45.jpg"/>
     <p><strong>Unsatisfiable Mordecai says:</strong></p>
         <div class="stars" id="unsatisfiableStars"></div>
-    <div class="review-text" id="unsatisfiableText">Loading...</div>
+    <div class="review-text" id="unsatisfiableText"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>
     </div>
 
     <div class="wrapper">
     <img src="https://randomuser.me/api/portraits/women/89.jpg"/>
     <p><strong>Easy Going Ava says:</strong></p>
     <div class="stars" id="easyGoingStars"></div>
-    <div class="review-text" id="easyGoingText">Loading...</div>
+    <div class="review-text" id="easyGoingText"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>
     </div>
 
     </div>
@@ -85,6 +154,7 @@
             allReviews.forEach(div => div.innerText = apiResult)
           } else {
           const {loyalResult, impulsiveResult, curiousResult, thriftyResult, unsatisfiableResult, easyGoingResult} = apiResult
+
           document.getElementById("loyalText").innerText = loyalResult.slice(1)
           document.getElementById("impulsiveText").innerText = impulsiveResult.slice(1)
           document.getElementById("curiousText").innerText = curiousResult.slice(1)
